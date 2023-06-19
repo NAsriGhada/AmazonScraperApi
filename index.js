@@ -6,7 +6,7 @@ const app = express()
 const PORT = process.env.PORT || 5000
 
 // const baseUrl = `http://api.scraperapi.com?api_key=${apiKey}&autoparse=true`
-const generateScrappeeUrl = (apiKey) =>
+const generateScrappedUrl = (apiKey) =>
   `http://api.scraperapi.com?api_key=${apiKey}&autoparse=true`;
 
 app.use(express.json())
@@ -22,7 +22,7 @@ app.get('/product/:productId', async (req, res) => {
     const { api_key } = req.query
     try {
         const response = await request(
-          `${generateScrappeeUrl(
+          `${generateScrappedUrl(
             api_key
           )}&url=https://www.amazon.com/dp/${productId}`
         );
@@ -39,7 +39,7 @@ app.get('/product/:productId/reviews', async (req, res) => {
 
     try {
         const response = await request(
-          `${generateScrappeeUrl(
+          `${generateScrappedUrl(
             api_key
           )}&url=https://www.amazon.com/product-reviews/${productId}`
         );
@@ -57,7 +57,7 @@ app.get('/product/:productId/offers', async (req, res) => {
 
     try {
         const response = await request(
-          `${generateScrappeeUrl(
+          `${generateScrappedUrl(
             api_key
           )}&url=https://www.amazon.com/gp/offer-listing/${productId}`
         );
@@ -75,7 +75,7 @@ app.get('/search/:searchQuery', async (req, res) => {
 
     try {
         const response = await request(
-          `${generateScrappeeUrl(
+          `${generateScrappedUrl(
             api_key
           )}&url=https://www.amazon.com/s?k=/${searchQuery}`
         );
